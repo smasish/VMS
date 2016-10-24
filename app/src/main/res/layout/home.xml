@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="horizontal" >
+
+
+        <Button
+            android:id="@+id/btnReg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#a2cb2d"
+            android:layout_weight="1.0"
+            android:text="Request (0)"
+            android:drawableLeft="@drawable/leave"/>
+
+        <Button
+            android:id="@+id/btnChecklist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#7ecce2"
+            android:layout_weight="1.0"
+            android:text="Checklist (0)"
+            android:drawableLeft="@drawable/timesheet" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btAppTravel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eb4142"
+            android:layout_weight="1.0"
+            android:text="Travel (0)"
+            android:drawableLeft="@drawable/travel"/>
+
+        <Button
+            android:id="@+id/btAppVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#feaa0a"
+            android:layout_weight="1.0"
+            android:text="Vehicle (0)"
+            android:drawableLeft="@drawable/vehicle"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btAppPRBH"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#337bab"
+            android:layout_weight="1.0"
+            android:text="PR (0)"
+            android:drawableLeft="@drawable/pr"/>
+
+        <Button
+            android:id="@+id/btAppPO"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffcd5cff"
+            android:layout_weight="1.0"
+            android:text="PO (0)"
+            android:drawableLeft="@drawable/po"/>
+
+    </LinearLayout>
+</LinearLayout>

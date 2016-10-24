@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/lay1"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txtVwUsrNm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Request No : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/request_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp">
+
+            </TextView>>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:id="@+id/lay2"
+            android:layout_below="@+id/lay1"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txtVwPswd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:text="Passenger Name : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/Passenger_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp">
+
+            </TextView>>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay3"
+            android:layout_below="@+id/lay2"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txtVwRetpePswd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Contact No : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/contact_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp">
+
+            </TextView>>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay4"
+            android:layout_below="@+id/lay3"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/txtVwRegionCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+                android:visibility="gone"
+
+                android:text="Mobile No"
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <TextView
+                android:id="@+id/mob_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay5"
+            android:layout_below="@+id/lay4"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txt_car_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+                android:text="Select Car: "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Spinner
+                android:id="@+id/car_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay6"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/lay5"
+            android:orientation="horizontal" >
+            <TextView
+
+                android:layout_weight="3"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start Place"
+
+                />
+            <TextView
+
+                android:layout_weight="3"
+                android:layout_width="0dip"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+
+                android:text="Start KM"
+                android:layout_marginRight="5dp"/>
+            <TextView
+
+                android:layout_weight="6"
+                android:layout_width="0dip"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+
+                android:text="Start DateTime"
+                android:layout_marginRight="5dp"/>
+            <TextView
+
+                android:layout_weight="3"
+                android:layout_width="0dip"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+
+                android:text="End PLace"
+                android:layout_marginRight="5dp"/>
+            <TextView
+
+                android:layout_weight="3"
+                android:layout_width="0dip"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+
+                android:text="End KM"
+                android:layout_marginRight="5dp"/>
+            <TextView
+
+                android:layout_weight="6"
+                android:layout_width="0dip"
+
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+
+                android:text="End DateTime"
+                android:layout_marginRight="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/lay7"
+            android:layout_below="@+id/lay6"
+            android:layout_marginLeft="25dp"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="2dp" />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay8"
+
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/lay7"
+            android:orientation="horizontal" >
+            <Button
+                android:id="@+id/start_journey_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_marginLeft="60dp"
+
+                android:text="Start Journey" />
+            <Button
+                android:id="@+id/end_journey_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:visibility="invisible"
+                android:text="End Journey" />
+
+            </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay9"
+            android:layout_below="@+id/lay8"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tx_startplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start Place : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/startplace_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay10"
+            android:layout_below="@+id/lay9"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tx_startkm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start KM : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/startkm_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay11"
+            android:layout_below="@+id/lay10"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/date_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start Date  : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/datetext_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:hint="Select Date"
+                android:inputType="date"
+                android:onClick="dateshow"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay12"
+            android:layout_below="@+id/lay11"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/time_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start Time : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/time_text_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:hint="Select Time"
+                android:inputType="datetime"
+                android:onClick="timeshow"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="650dp"
+            android:gravity="center_horizontal"
+            android:id="@+id/savelayout"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:onClick="close"
+
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="save"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+
+                android:text="Save" />
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="submit"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+
+                android:text="Submit" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/savelayout"
+
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/edit_ConfirmId"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:inputType="number"
+                android:hint="Staff ID" />
+
+
+            <Button
+                android:id="@+id/btnConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="confirm"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:text="Confirm Trip" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>

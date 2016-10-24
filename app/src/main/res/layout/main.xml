@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+
+        android:orientation="horizontal" >
+
+
+        <Button
+            android:id="@+id/btnReg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_weight="1.0"
+            android:text="Travel Request (0)"
+            android:textColor="@color/white"
+            android:paddingTop="80dp"
+            android:drawableTop="@drawable/icon_tr"
+            android:gravity="center_horizontal|top"
+            android:background="@drawable/buttoncolor"/>
+
+        <Button
+            android:id="@+id/btnChecklist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="1.0"
+            android:text="Checklist (0)"
+            android:drawableTop="@drawable/icon_check_list"
+            android:paddingTop="80dp"
+            android:gravity="center_horizontal|top"
+            android:background="@drawable/buttoncolor_grey" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btAppTravel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="1.0"
+            android:text="Maintenance (0)"
+            android:drawableTop="@drawable/icon_maintanance"
+            android:paddingTop="80dp"
+            android:gravity="center_horizontal|top"
+            android:background="@drawable/buttoncolor_grey"/>
+
+        <Button
+            android:id="@+id/btAppVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="1.0"
+            android:text="Fuel (0)"
+            android:drawableTop="@drawable/icon_fuel"
+            android:paddingTop="80dp"
+            android:gravity="center_horizontal|top"
+            android:background="@drawable/buttoncolor"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btAppPRBH"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="1.0"
+            android:text="GPS (0)"
+            android:drawableTop="@drawable/icon_gps"
+            android:paddingTop="80dp"
+            android:gravity="center_horizontal|top"
+            android:background="@drawable/buttoncolor"/>
+
+        <Button
+            android:id="@+id/btAppPO"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/buttoncolor_grey"
+            android:drawableTop="@drawable/icon_help"
+            android:layout_weight="1.0"
+            android:text="Help (0)"
+            android:textColor="@color/white"
+            android:paddingTop="80dp"
+            android:gravity="center_horizontal|top"
+           />
+
+    </LinearLayout>
+</LinearLayout>

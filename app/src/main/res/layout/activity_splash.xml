@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/splash">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <!--<ImageView android:id="@+id/splashscreen"-->
+            <!--android:layout_marginBottom="80dp"-->
+            <!--android:layout_marginTop="80dp"-->
+            <!--android:layout_width="60dip"-->
+            <!--android:layout_height="60dip"-->
+            <!--android:src="@drawable/odw"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:contentDescription="@string/imONDESK" />-->
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <!--<TextView android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/tvWelcome"-->
+            <!--android:textColor="#ffffffff"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="24dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:gravity="center" />-->
+
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnGetRegId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get RegId"
+        android:onClick="onGetID"
+        android:visibility="invisible" />
+
+
+</LinearLayout>

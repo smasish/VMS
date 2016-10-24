@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="#B48E8E"
+	>
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:background="#B48E8E"
+		>
+
+
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:orientation="vertical"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="15dp"
+
+			>
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:text=" @+id/TextView01" android:id="@+id/feedrowitem"
+	android:textSize="18sp"
+
+		android:textStyle="bold"
+		android:textColor="#000000"
+		android:paddingTop="4dip"
+		android:paddingBottom="2dip"
+		
+		android:gravity="center_vertical"
+
+		
+		android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+
+<TextView
+android:text=" prabhupada" android:id="@+id/details"
+android:textSize="15sp"
+
+android:textColor="#000000"
+android:paddingTop="1dip"
+android:paddingBottom="2dip"
+
+android:gravity="center_vertical"
+
+
+android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+		</LinearLayout>
+	</LinearLayout>
+	</LinearLayout>

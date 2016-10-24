@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="red">#bf360c</color>
+    <color name="ripple_red">#ffbf5232</color>
+    <color name="appcolor">#50597A</color>
+    <color name="tabcolor2">#10A8AB</color>
+    <color name="tabcolor">#8FDADF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="material_teal">@color/material_deep_teal_500</color>
+    <color name="ripple_material_teal">#ff149691</color>
+    <color name="blue_dark">#1F253D</color>
+    <color name="blue">#394165</color>
+    <color name="list_devider">#1b2136</color>
+    <color name="list_text_bg">#2f3448</color>
+    <color name="textview_bg">#15192a</color>
+    <color name="Light_purple">#DCABC1</color>
+    <color name="Login_color">#611436</color>
+    <color name="dark_yellow">#F8C34B</color>
+    <color name="purple">#812E52</color>
+    <color name="light_green">#32FF0A</color>
+
+    <color name="black">#000000</color>
+
+    <!--1F253D-->
+    <color name="list_text_bottom">#55000000</color>
+    <color name="button_pressed">#282828</color>
+    <color name="button_focused">#D20009</color>
+    <color name="button_default">#727071</color>
+
+    <color name="button_clicked">#D20009</color>
+
+</resources>

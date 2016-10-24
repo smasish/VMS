@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+
+    android:orientation="horizontal" >
+<!--  -->
+      <ImageView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/lefticon"
+        android:layout_width="48dip"
+        android:layout_height="48dip"
+        android:visibility="gone"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip" />   
+
+    <LinearLayout
+        android:id="@+id/midid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+         android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/feedrowitem"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical|center_horizontal"
+            android:text=" @+id/TextView01"
+            android:textColor="@color/white"            
+            android:textSize="16sp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/address_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="address"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold" >
+        </TextView>
+    </LinearLayout>
+
+
+
+</RelativeLayout>

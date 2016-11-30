@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button reqBtn,checkBtn,travelBtn,maintainBtn;
 
-private Context con;
+    private Context con;
 
 
     @Override
@@ -48,6 +48,9 @@ private Context con;
 
         reqBtn = (Button)findViewById(R.id.btnReg);
         reqBtn.setOnClickListener(this);
+
+        checkBtn = (Button)findViewById(R.id.btnChecklist);
+        checkBtn.setOnClickListener(this);
         travelBtn = (Button)findViewById(R.id.btAppTravel);
 
 
@@ -62,7 +65,7 @@ private Context con;
 //                //Create intent
 //                Intent intent = new Intent(MainActivity.this, MainActivity.class);
 ////                intent.putExtra("title", item.getTitle());
-////                intent.putExtra("image", item.getImage());
+
 ////
 //                int mon = position+1;
 //                intent.putExtra("pos",mon);
@@ -105,6 +108,12 @@ private Context con;
                 startActivity(req);
 
 
+                break;
+            case R.id.btnChecklist:
+                // TODO Auto-generated method stub
+                Intent check = new Intent(MainActivity.this, ChecklistActivity.class);
+
+                startActivity(check);
                 break;
             case R.id.btAppTravel:
                 // TODO Auto-generated method stub

@@ -49,8 +49,10 @@ public final class SharedPreferencesHelper {
 	private static final String PREF_TAB_FEED_KEY = "tabFeed";
 
 	private static final String USER = "user";
+	private static final String PASSWORD = "password";
 	private static final String PASS = "pass";
 	private static final String NAME = "name";
+	private static final String REQ = "reg";
 	private static final String MOBILE = "mobile";
 	private static final String ALL_ID = "allocationid";
 
@@ -84,6 +86,21 @@ public final class SharedPreferencesHelper {
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
 		final Editor editor = prefs.edit();
 		editor.putBoolean(SharedPreferencesHelper.REMEMBER, flag);
+		editor.commit();
+	}
+
+
+	public static String getPassword(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.PASSWORD, "");
+	}
+
+	public static void setPassword(final Context ctx, final String user) {
+		final SharedPreferences prefs = ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor = prefs.edit();
+		editor.putString(SharedPreferencesHelper.PASSWORD, user);
 		editor.commit();
 	}
 
@@ -154,6 +171,21 @@ public final class SharedPreferencesHelper {
 				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
 		final Editor editor = prefs.edit();
 		editor.putString(SharedPreferencesHelper.NAME, pass);
+		editor.commit();
+	}
+
+
+	public static String getReqNo(final Context ctx) {
+		return ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE)
+				.getString(SharedPreferencesHelper.REQ, "");
+	}
+
+	public static void setReqNo(final Context ctx, final String pass) {
+		final SharedPreferences prefs = ctx.getSharedPreferences(
+				SharedPreferencesHelper.PREFS_FILE_NAME, Context.MODE_PRIVATE);
+		final Editor editor = prefs.edit();
+		editor.putString(SharedPreferencesHelper.REQ, pass);
 		editor.commit();
 	}
 

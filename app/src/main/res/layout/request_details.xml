@@ -25,7 +25,7 @@
 
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="5dp"
-                android:text="Request No : "
+                android:text="Request No            : "
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
 
-                android:text="Passenger Name : "
+                android:text="Passenger Name  : "
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <TextView
@@ -77,7 +77,7 @@
 
                 android:layout_marginLeft="25dp"
 
-                android:text="Contact No : "
+                android:text="Contact No            : "
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <TextView
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginLeft="25dp"
-                android:text="Select Car: "
+                android:text="Select Car              :"
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <Spinner
@@ -140,6 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
 
+                android:layout_marginBottom="20dp"
                 android:layout_marginRight="15dp"/>
         </LinearLayout>
 
@@ -238,18 +239,20 @@
             android:gravity="center_horizontal"
             android:layout_below="@+id/lay7"
             android:orientation="horizontal" >
-            <Button
+            <TextView
                 android:id="@+id/start_journey_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                android:layout_marginLeft="60dp"
 
+                android:textSize="24dp"
                 android:text="Start Journey" />
-            <Button
+            <TextView
                 android:id="@+id/end_journey_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
+                android:textSize="24dp"
                 android:visibility="invisible"
                 android:text="End Journey" />
 
@@ -377,8 +380,8 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_marginLeft="25dp"
+                android:background="@color/colorPrimary"
+                android:layout_marginLeft="20dp"
 
                 android:onClick="close"
 
@@ -389,20 +392,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="save"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-
+                android:background="@color/colorPrimary"
                 android:text="Save" />
 
             <Button
-                android:id="@+id/btnRegister"
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="submit"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+
+            android:text="Submit" />
+
+            <Button
+                android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="submit"
+                android:onClick="delete"
+                android:background="@color/colorPrimary"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginRight="10dp"
 
-                android:text="Submit" />
+                android:text="Delete" />
         </LinearLayout>
 
 
@@ -429,6 +444,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="confirm"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@color/colorPrimary"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
                 android:text="Confirm Trip" />

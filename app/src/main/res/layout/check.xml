@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:id="@+id/findSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:text="Vehicle Checklist" />
+
+    <ListView android:id="@+id/listView1" android:layout_width="fill_parent"
+        android:layout_below="@+id/findSelected"
+        android:layout_height="400dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/rem_row"
+        android:layout_below="@+id/listView1"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:id="@+id/spin_row"
+            >
+
+            <TextView
+                android:id="@+id/spin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:text="Select Car from list: " />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spin"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/car_id">
+            </Spinner>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/spin_row"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:textColor="@color/black"
+            android:text="Remarks" />
+        <EditText
+            android:id="@+id/remark_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/remark"
+            android:gravity="center_horizontal"
+
+
+            android:hint="Write Remarks here." />
+
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/lastrow"
+        android:layout_below="@+id/rem_row"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:id="@+id/prev_id"
+            android:onClick="back"
+            android:textSize="26sp"
+            android:layout_marginLeft="2dp"
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:onClick="submit"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/prev_id"
+            android:id="@+id/next_id"
+            android:textSize="26sp"
+            android:layout_marginRight="2dp"
+
+            />
+
+    </RelativeLayout>
+</RelativeLayout>

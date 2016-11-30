@@ -1,11 +1,14 @@
 package scibd.lab.vms;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -65,8 +68,10 @@ public class RequestDetailsActivity extends AppCompatActivity {
 	//,from_date,todate, start_point, end_point;
 	String str="";
 	private EditText startpoint,startkm,endpoint,endkm, date,time,staff_id;
-	private int mYear, mMonth, mDay, mHour, mMinute;
-	private Button start_journey,end_journey;
+	private int mYear, mMonth, mDay, mHour, mMinute,ampm;
+	String ar="";
+
+	private TextView start_journey,end_journey;
 
 	private Context con;
 	private boolean flag = false;
@@ -89,13 +94,24 @@ public class RequestDetailsActivity extends AppCompatActivity {
 	List<String> categories;
 	String request_trip = "",confirm_id="";
 
+	private boolean submitflag = false;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.request_details);
+
+//		ActionBar bar = getActionBar();
+//for color
+//		bar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#00C4CD")));
+//for image
+		//bar.setBackgroundDrawable(getResources().getDrawable(R.drawable.settings_icon));
+
+
 		con = this;
 		flag = false;
+		submitflag = false;
 
 		str = getIntent().getStringExtra("request");
 
@@ -107,8 +123,8 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		//start_point = (TextView)findViewById(R.id.startplace_id);
 //		end_point = (TextView)findViewById(R.id.endpoint_id);
 
-		start_journey = (Button) findViewById(R.id.start_journey_id);
-		end_journey = (Button) findViewById(R.id.end_journey_id);
+		start_journey = (TextView) findViewById(R.id.start_journey_id);
+		end_journey = (TextView) findViewById(R.id.end_journey_id);
 		tripflag=false;
 
 		String a = "01911612673.";
@@ -119,6 +135,14 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		startkm = (EditText) findViewById(R.id.startkm_id);
 		date = (EditText) findViewById(R.id.datetext_id);
 		time = (EditText) findViewById(R.id.time_text_id);
+
+
+
+		String today=   getToday("hh:mm a");  // getToday("yyyy-MM-dd hh:mm");
+		time.setText(today);
+
+		today=   getToday("yyyy-MM-dd");
+		date.setText(today);
 
 		staff_id = (EditText) findViewById(R.id.edit_ConfirmId);
 
@@ -205,34 +229,34 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		start_time = date.getText().toString()+" "+time.getText().toString();;
 		TripData tripData = null;
 
+if(start_place.length()>1 && start_km.length()>=1) {
 
 
+	if (tripflag) {
+		end_journey.setVisibility(View.VISIBLE);
+		tripflag = false;
+		start_journey.setVisibility(View.GONE);
+		SharedPreferencesHelper.setJourney(con, true);
 
-		if(tripflag){
-			end_journey.setVisibility(View.VISIBLE);
-			tripflag = false;
-			start_journey.setVisibility(View.GONE);
-			SharedPreferencesHelper.setJourney(con,true);
+		tripData = datasource.createComment(start_place, start_km, start_time, "-", "-", "-");
 
-			tripData = datasource.createComment(start_place,start_km,start_time,"-","-","-");
+		adapter.add(tripData);
+		lv.setAdapter(adapter);
+		changed();
 
-			adapter.add(tripData);
-			lv.setAdapter(adapter);
-			changed();
+	} else {
 
-		}else{
-			end_journey.setVisibility(View.GONE);
-			tripflag = true;
-			start_journey.setVisibility(View.VISIBLE);
-			SharedPreferencesHelper.setJourney(con,false);
 
-			String id = ""+datasource.getAllComments().size();
+		int index = datasource.getAllComments().size() - 1;
 
-			int k = Integer.parseInt(id);
-			if(k>0)
-				k = k-1;
 
-			//http://stackoverflow.com/questions/14214713/how-to-compare-two-date-and-time-in-android
+		//String id = ""+datasource.getAllComments().get(index).getId();
+
+		//int k = Integer.parseInt(id);
+//			if(k>0)
+//				k = k-1;
+
+		//http://stackoverflow.com/questions/14214713/how-to-compare-two-date-and-time-in-android
 //			String tem = datasource.getAllComments().get(k).getStartdate().toString();
 //			try{
 //				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -246,23 +270,39 @@ public class RequestDetailsActivity extends AppCompatActivity {
 //				ex.printStackTrace();
 //			}
 
-			Log.d("====k===="+k, "...id..>>" + id);
-			long d = Long.parseLong(datasource.getAllComments().get(k).getStartkm());
-			long now = Long.parseLong(start_km);
-			if(d<now){
-				datasource.updateOrderItems(id,start_place,start_km,start_time);
 
+		long d = Long.parseLong(datasource.getAllComments().get(index).getStartkm());
+		String d1 = datasource.getAllComments().get(index).getStartdate();
+		long now = Long.parseLong(start_km);
+
+		Log.d("====k====" + d1, "...id..>>" + start_time);
+		if (d < now) {
+
+
+			if (compare(d1, start_time)) {
+				String id = "" + datasource.getAllComments().get(index).getId();
+				datasource.updateOrderItems(id, start_place, start_km, start_time);
+				end_journey.setVisibility(View.GONE);
+				tripflag = true;
+				start_journey.setVisibility(View.VISIBLE);
+				SharedPreferencesHelper.setJourney(con, false);
 				changed();
-			}else{
-				AlertMessage.showMessage(con,"Sorry","End KM is lower than Start KM.");
-				tripflag = false;
-				SharedPreferencesHelper.setJourney(con,true);
+			} else {
+				AlertMessage.showMessage(con, "Sorry", "Invalied End Date/Time.");
 			}
 
-
+		} else {
+			AlertMessage.showMessage(con, "Sorry", "End KM is lower than Start KM.");
+			tripflag = false;
+			SharedPreferencesHelper.setJourney(con, true);
 		}
 
 
+	}
+
+}else{
+	AlertMessage.showMessage(con,"Sorry","Please enter place name and Kilometer correctly.");
+}
 
 
 
@@ -272,6 +312,53 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		Intent refresh = new Intent(this, RequestDetailsActivity.class);
 		startActivity(refresh);
 		finish();
+	}
+
+
+	public boolean compare(String before,String after){
+		//SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat sdf =  new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+		Date d=null;
+		Date d1=null;
+		//String today=   getToday("MMM-dd-yyyy hh:mm:ss a");
+		//String today=   getToday(after);
+		//Log.d("*****today*********. ", "--v--"+today);
+		try {
+			//System.out.println("expdate>> "+date);
+			//System.out.println("today>> "+today+"\n\n");
+			sdf.setLenient(false);
+			d = sdf.parse(before);
+			d1 = sdf.parse(after);
+			Log.d("---start-. ", "----");
+			Log.d("---start-. ", "----"+d1.compareTo(d));
+			Log.d("---dddd-. "+d.getTime() , "----"+d1.getTime());
+			if(d.compareTo(d1) <0){ // not expired
+				Log.d("---not expired--. ", "----");
+				return true;
+			}else if(d.compareTo(d1)==0){ // both date are same
+				Log.d("---same-. ", "----");
+				if(d.getTime() < d1.getTime()){// not expired
+					return true;
+				}else if(d.getTime() == d1.getTime()){//expired
+					Log.d("-- expired--. ", "----");
+					return false;
+				}else{//expired
+					Log.d("-- expired--true. ", "----");
+					return true;
+				}
+			}else{//expired
+				Log.d("-- expired--false. ", "----");
+				return false;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static String getToday(String format){
+		Date date = new Date();
+		return new SimpleDateFormat(format).format(date);
 	}
 
 	private void postAllTrip3(final int x){
@@ -290,11 +377,23 @@ public class RequestDetailsActivity extends AppCompatActivity {
 						progressDialog.dismiss();
 					//	if(response.trim().equals("Successful")){
 							//openProfile();
-							tripData = (TripData) datasource.getAllComments().remove(0); //(TripData) getListAdapter().getItem(0);
-
-							datasource.deleteComment(tripData);
-						    adapter.remove(tripData);
-							lv.invalidate();
+//							tripData = (TripData) datasource.getAllComments().remove(0); //(TripData) getListAdapter().getItem(0);
+							submitflag = true;
+						Log.d("====x=", "..xx..>>" + x);
+						int size = datasource.getAllComments().size();
+						if(x == datasource.getAllComments().size()-1) {
+							for (int i = 0; i < size; i++) {
+								tripData = (TripData) datasource.getAllComments().remove(0); //(TripData) getListAdapter().getItem(0);
+								Log.d("====id="+tripData.getId(), "..i..>>" + i+"--"+tripData.getEndKM());
+								datasource.deleteComment(tripData);
+							}
+							adapter = new TripAdapter(RequestDetailsActivity.this);
+							lv.setAdapter(adapter);
+							//lv.invalidate();
+						}
+//							datasource.deleteComment(tripData);
+						   // adapter.remove(tripData);
+							//lv.invalidate();
 					//	}else{
 							Toast.makeText(RequestDetailsActivity.this,response,Toast.LENGTH_LONG).show();
 					//	}
@@ -377,12 +476,12 @@ public class RequestDetailsActivity extends AppCompatActivity {
 			protected Map<String, String> getParams() throws AuthFailureError {
 				Map<String,String> data = new HashMap<String,String>();
 
-
+				Log.d(".confirm id--."+SharedPreferencesHelper.getStaff(con), ".."+confirm_id);
 				Log.d("@@@@ car no ---"+datasource.getAllComments().size(), "..");
 				//data.put("Title", "Android Volley Demo");
 				//data.put("Author", "BNK");
-				data.put("AllocationId", SharedPreferencesHelper.getStaff(con));
-				data.put("StaffID", "1212");
+				data.put("AllocationId", SharedPreferencesHelper.getAllocationid(con));
+				data.put("StaffID", confirm_id);
 				//data.put("StaffID", SharedPreferencesHelper.getStaff(con));
 
 
@@ -476,9 +575,9 @@ public class RequestDetailsActivity extends AppCompatActivity {
 	public void submit(View v){
 
 
-		Log.d("..", ".."+start_place);
-		Log.d("Login e------", "start===="+start_place);
-		Log.d("Login Response------", "start===="+start_place);
+		//Log.d("..", ".."+start_place);
+	//	Log.d("Login e------", "start===="+start_place);
+		//Log.d("Login Response------", "start===="+start_place);
 
 		String title = "loading";
 		String message = "Checking username \nPlease wait...";
@@ -492,13 +591,16 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		}
 		else if(tripflag){
 			for(int i = 0;i<datasource.getAllComments().size();i++){
+				//int ind = datasource.getAllComments().get(i).getId();
+				Log.d(".ind.---", ".."+i);
 				postAllTrip3(i);
 			}
+
 		}else{
 			AlertMessage.showMessage(con,"Sorry,Can't submit now.","You have to complete Trip");
 		}
 
-
+		lv.invalidate();
 
 	}
 
@@ -707,6 +809,18 @@ public class RequestDetailsActivity extends AppCompatActivity {
 
 						//date.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 						String da = ""+year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+						String a="",b="",c="";
+						monthOfYear = monthOfYear+1;
+
+						if(monthOfYear<10)
+							b = "0"+monthOfYear;
+						else
+							b = ""+monthOfYear;
+
+						if(dayOfMonth<10)
+							c = "0"+dayOfMonth;
+						else
+							c = ""+dayOfMonth;
 //						try{
 //						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //						Date date1 = sdf.parse("2009-12-31");
@@ -718,7 +832,9 @@ public class RequestDetailsActivity extends AppCompatActivity {
 //						}catch(ParseException ex){
 //							ex.printStackTrace();
 //						}
-						date.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+							date.setText(year + "-" + b + "-" + c);
+
 
 					}
 				}, mYear, mMonth, mDay);
@@ -730,6 +846,13 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		final Calendar c = Calendar.getInstance();
 		mHour = c.get(Calendar.HOUR_OF_DAY);
 		mMinute = c.get(Calendar.MINUTE);
+		ampm = c.get(Calendar.AM_PM);
+		int a = c.get(Calendar.AM_PM);
+
+		if(a == 1)
+			ar = "PM";
+		else
+			ar = "AM";
 
 		// Launch Time Picker Dialog
 		TimePickerDialog timePickerDialog = new TimePickerDialog(this,
@@ -738,11 +861,41 @@ public class RequestDetailsActivity extends AppCompatActivity {
 					@Override
 					public void onTimeSet(TimePicker view, int hourOfDay,
 										  int minute) {
-
-						time.setText(hourOfDay + ":" + minute);
+						Log.d("***ampm*****. ", "===" +ampm);
+						if(hourOfDay<12)
+							ar = "AM";
+						if(hourOfDay>12)
+							hourOfDay = hourOfDay-12;
+						if(minute<10 && hourOfDay<10)
+						 time.setText("0"+hourOfDay + ":" + "0"+minute+" "+ar);
+						else if(hourOfDay<10 && minute>9)
+							time.setText("0"+hourOfDay + ":" + minute+" "+ar);
+						else if(hourOfDay>9 && minute<10)
+							time.setText(hourOfDay + ":" + "0"+minute+" "+ar);
+						else
+							time.setText(hourOfDay + ":" + minute+" "+ar);
 					}
 				}, mHour, mMinute, false);
 		timePickerDialog.show();
+	}
+
+	public void delete(View v){
+		int size = datasource.getAllComments().size();
+		TripData tripData;
+		if(datasource.getAllComments().size()>0) {
+			for (int i = 0; i < size; i++) {
+				tripData = (TripData) datasource.getAllComments().remove(0); //(TripData) getListAdapter().getItem(0);
+				//Log.d("====id=" + tripData.getId(), "..i..>>" + i + "--" + tripData.getEndKM());
+				datasource.deleteComment(tripData);
+			}
+			adapter = new TripAdapter(RequestDetailsActivity.this);
+			lv.setAdapter(adapter);
+			Toast.makeText(con,"All entry deleted.",Toast.LENGTH_LONG).show();
+			SharedPreferencesHelper.setJourney(con,false);
+			Intent refresh = new Intent(this, RequestDetailsActivity.class);
+			startActivity(refresh);
+			finish();
+		}
 	}
 
 	public void close(View v){

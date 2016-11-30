@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,7 +35,7 @@ import scibd.lab.vms.utils.AppConstants;
 import scibd.lab.vms.utils.AppUtils;
 import scibd.lab.vms.utils.SharedPreferencesHelper;
 
-public class InfoActivity extends Activity {
+public class InfoActivity extends AppCompatActivity {
 
 	ListView lv;
 	String name = "";
@@ -49,6 +51,7 @@ public class InfoActivity extends Activity {
 	private static ProgressDialog pd;
 	String[] nevg_array;
 	JSONArray mArray;
+	private EditText staff_id;
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -67,15 +70,32 @@ public class InfoActivity extends Activity {
 
 		//adapter = new RadioAdapter(this);
 
-		//lv.setAdapter(adapter);
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
 
+		staff_id = (EditText)findViewById(R.id.staffid);
+
+	}
+
+
+	public void search(View v){
+		String id = "";
+		id = staff_id.getText().toString();
+		String url = AppConstants.API_GETREQUEST+id+"&requestNo="+SharedPreferencesHelper.getReqNo(con);
+		Log.d("====url====","----"+url);
+		if(id.length()>=1){
+			makeHttpRequest(url);
+		}
+	}
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 
 		String title = "loading";
 		String message = "Checking username \nPlease wait...";
 		pd = ProgressDialog.show(con, title, message, true, true);
 		new BackOperation().execute("");
+		Log.d("==onresume theke===","----");
 	}
 
 	private class BackOperation extends AsyncTask<String, String, String> {
@@ -86,8 +106,10 @@ public class InfoActivity extends Activity {
 
 			try {
 
-				Log.d("========","----");
-				makeHttpRequest();
+
+				String url = AppConstants.API_URL+SharedPreferencesHelper.getStaff(con);
+				Log.d("==url======","----"+url);
+				makeHttpRequest(url);
 
 
 			} catch (Exception e) {
@@ -177,10 +199,10 @@ public class InfoActivity extends Activity {
 	}
 
 
-	private void makeHttpRequest() {
+	private void makeHttpRequest(String url) {
 
 		RequestQueue mVolleyQueue = Volley.newRequestQueue(con);
-		String url = AppConstants.API_URL;
+
 
 		JsonArrayRequest jReq = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
 
@@ -203,17 +225,18 @@ public class InfoActivity extends Activity {
 						nevg_array[i] = name;
 						flag = true;
 
+
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
 
 
-				if(name.length()<1) {
-					name = "Shyamal Mondal";
-					nevg_array  = new String[1];
-					nevg_array[0] = name;
-				}
+//				if(name.length()<1) {
+//					name = "Shyamal Mondal";
+//					nevg_array  = new String[1];
+//					nevg_array[0] = name;
+//				}
 //				for(int i = 0;i<response.length();i++){
 //					try {
 //						//nevg_array[i] = response.getJSONObject(i).getString("PassengerName:").toString();
@@ -243,17 +266,20 @@ public class InfoActivity extends Activity {
 						JSONObject mJsonObject = mArray.getJSONObject(position);
 							SharedPreferencesHelper.setMobile(con,""+mJsonObject.getString("ContactNo"));
 							SharedPreferencesHelper.setName(con,""+mJsonObject.getString("PassengerName"));
-							SharedPreferencesHelper.setStaff(con,""+mJsonObject.getString("Request"));
+							//SharedPreferencesHelper.setStaff(con,""+mJsonObject.getString("Request"));
 						//	SharedPreferencesHelper.setName(con,""+mJsonObject.getString("Request"));
 							selectedmovie = mJsonObject.getString("AllocationId");
 							SharedPreferencesHelper.setAllocationid(con,""+mJsonObject.getString("AllocationId"));
+
+							Log.d("reg no---", mJsonObject.getString("Request"));
+							SharedPreferencesHelper.setReqNo(con,mJsonObject.getString("Request"));
 
 					} catch (JSONException e)
 
 					{
 						e.printStackTrace();
 					}
-						Toast.makeText(getApplicationContext(), "Movie Selected : "+selectedmovie,   Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), "Request Selected : "+selectedmovie,   Toast.LENGTH_LONG).show();
 						Intent i = new Intent(InfoActivity.this, RequestDetailsActivity.class);
 						i.putExtra("request",selectedmovie);
 						startActivity(i);

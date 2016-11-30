@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -13,15 +13,54 @@
     android:layout_marginLeft="10dp"
     android:textColor="#202020"
     android:id="@+id/about"
-    android:text="User Information"
+    android:text="Request List"
     />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/row1"
+
+        android:layout_below="@+id/about"
+        android:background="#B48a8A"
+        android:layout_height="wrap_content">
+
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Staff ID"
+            android:inputType="number"
+            android:id="@+id/staffid"
+
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:id="@+id/nirdeshona_id"
+            android:textSize="26sp"
+            android:onClick="search"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            />
+
+
+
+    </RelativeLayout>
+
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/row1"
+        android:layout_marginTop="10dp"
         android:id="@+id/reqList"
         >
 
     </ListView>
 
-</LinearLayout>
+</RelativeLayout>

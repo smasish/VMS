@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">VMS</string>
 
+    <string name="app_title">Vehicle Management System</string>
+
     <string name="tvWelcome">Welcome to Vehicle Management System</string>
     <string name="imONDESK">imOndeskImg</string>
 

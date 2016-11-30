@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private String userType;
 
     String name="";
-
+    String nam = "";
 
 
     //http://vmsservice.scibd.info/vmsservice.asmx/GetRequestAll?staffID=743
@@ -88,6 +88,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         password=(EditText)findViewById(R.id.password);
         login =(Button)findViewById(R.id.login);
         login.setOnClickListener(this);
+
+    String temp = "";
+        temp = SharedPreferencesHelper.getUser(con);
+        if(temp.length()>=1){
+            username.setText(""+temp);
+        }
+        temp = "";
+        temp = SharedPreferencesHelper.getPassword(con);
+        if(temp.length()>=1){
+            password.setText(""+temp);
+        }
 
 
     }
@@ -234,8 +245,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             user= username.getText().toString().trim();
             pass= password.getText().toString().trim();
 
-            user = "shyamal.mondal";
-            pass = "wxyz789ABC";
+//            user = "shyamal.mondal";
+//            pass = "wxyz789ABC";
 
             if (user.equalsIgnoreCase("")) {
                 AlertMessage.showMessage(LoginActivity.this, "Please insert User name.",
@@ -248,8 +259,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
             else {
-                pd = ProgressDialog.show(con, title, message, true, true);
-                new BackOperation().execute();
+               // pd = ProgressDialog.show(con, title, message, true, true);
+                //new BackOperation().execute();
+
+                loginuser();
             }
 //            Intent i = new Intent(LoginActivity.this,MainActivity.class);
 //            startActivity(i);
@@ -377,6 +390,83 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 return params;
             }
 
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
+
+    private void loginuser(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Checking username and password.Please wait...");
+        progressDialog.show();
+
+
+        name="";
+        String URL = AppConstants.LOGIN_API;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d(".response--.", ".."+response.toString());
+                        JSONArray mArray;
+                        try {
+                            mArray = new JSONArray(response.toString());
+                            for (int i = 0; i < mArray.length(); i++) {
+                                JSONObject mJsonObject = mArray.getJSONObject(i);
+                                Log.d("OutPut---", mJsonObject.getString("StaffID"));
+                                Log.d("OutPut---", mJsonObject.getString("FullName"));
+                                name = mJsonObject.getString("StaffID");
+                                nam = mJsonObject.getString("FullName");
+                                SharedPreferencesHelper.setStaff(con,name);
+                                SharedPreferencesHelper.setName(con,mJsonObject.getString("FullName"));
+                                flag = true;
+
+                                SharedPreferencesHelper.setUser(con,user);
+                                SharedPreferencesHelper.setPassword(con,pass);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d("response--flag-", ""+flag );
+                        Toast.makeText(LoginActivity.this, "Welcome "+ nam, Toast.LENGTH_SHORT).show();
+
+                         if(name.length()>=1 || response.toString().equalsIgnoreCase("[]") ) {
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                i.putExtra("staffid",name);
+                                startActivity(i);
+                             SharedPreferencesHelper.setUser(con,user);
+                             SharedPreferencesHelper.setPassword(con,pass);
+                                progressDialog.dismiss();
+                                finish();
+                           }else{
+                             AlertMessage.showMessage(con,"Sorry","Wrong username or Password.");
+                             progressDialog.dismiss();
+                         }
+                        AppUtils.setUserType(LoginActivity.this,"");
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_LONG ).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> data = new HashMap<String,String>();
+
+
+                data.put("loginName", user);
+                data.put("loginPass", pass);
+
+                Log.d(".response--.", ".."+data);
+                return data;
+            }
         };
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);

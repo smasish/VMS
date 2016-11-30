@@ -138,7 +138,7 @@ public class QueryDataSource {
 
 	private TripData cursorToComment(Cursor cursor) {
 		TripData tripData = new TripData();
-		tripData.setId(cursor.getLong(0));
+		tripData.setId(cursor.getInt(0));
 
 		tripData.setStartplace(cursor.getString(1));
 		tripData.setStartkm(cursor.getString(2));

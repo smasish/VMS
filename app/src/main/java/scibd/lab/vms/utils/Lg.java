@@ -3,9 +3,9 @@ package scibd.lab.vms.utils;
 import android.util.Log;
 
 /**
- * Created by touhid on 10/30/15.
+ * Created by asish on 10/30/15.
  *
- * @author touhid
+ * @author asish
  */
 public class Lg {
     private static final boolean IS_APP_DEBUGGABLE = true;

@@ -37,7 +37,7 @@ import scibd.lab.vms.utils.SharedPreferencesHelper;
 
 public class InfoActivity extends AppCompatActivity {
 
-	ListView lv;
+	ListView lv,lv_history;
 	String name = "";
 	Boolean flag  = false;
 
@@ -65,6 +65,8 @@ public class InfoActivity extends AppCompatActivity {
 		//Details = (TextView) findViewById(R.id.startpoint_id);
 
 		lv = (ListView) findViewById(R.id.reqList);
+
+		lv_history = (ListView) findViewById(R.id.historyList);
 
 		//parsingNewsData(AppConstants.API_URL);
 
@@ -96,6 +98,50 @@ public class InfoActivity extends AppCompatActivity {
 		pd = ProgressDialog.show(con, title, message, true, true);
 		new BackOperation().execute("");
 		Log.d("==onresume theke===","----");
+
+
+	}
+
+	private class HistoryList extends AsyncTask<String, String, String> {
+
+
+		@Override
+		protected String doInBackground(String... params) {
+
+			try {
+
+
+				String url = AppConstants.API_URL+SharedPreferencesHelper.getStaff(con);
+				Log.d("==url======","----"+url);
+				history_parsing(url);
+
+
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+			return null;
+		}
+
+
+		@Override
+		protected void onPostExecute(String result) {
+
+			lv.setAdapter(adapter);
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+
+		}
+
+
+		@Override
+		protected void onProgressUpdate(String... text) {
+
+
+		}
 	}
 
 	private class BackOperation extends AsyncTask<String, String, String> {
@@ -196,6 +242,107 @@ public class InfoActivity extends AppCompatActivity {
 			AlertMessage.showMessage(this, "Info", "No internet connection found.");
 		}
 
+	}
+
+	private void history_parsing(String url) {
+
+		RequestQueue mVolleyQueue = Volley.newRequestQueue(con);
+
+
+		JsonArrayRequest jReq = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+
+			@Override
+			public void onResponse(JSONArray response) {
+				// Utils.LoadingControl(false, "loading");
+				//  listView.setAdapter(new OptionAdapter(context,response,2));
+				Log.d("response=======",response.toString());
+
+
+
+				try {
+					nevg_array  = new String[response.length()];
+					mArray = new JSONArray(response.toString());
+					for (int i = 0; i < mArray.length(); i++) {
+						JSONObject mJsonObject = mArray.getJSONObject(i);
+						Log.d("OutPut---", mJsonObject.getString("ContactNo"));
+						Log.d("OutPut---", mJsonObject.getString("PassengerName"));
+						name = "Name: "+mJsonObject.getString("PassengerName")+" \nStart Point: "+mJsonObject.getString("Start") + "\nContact No: "+mJsonObject.getString("ContactNo")
+								+ "\nFrom: "+mJsonObject.getString("DateTimeFrom")+" To:  "+mJsonObject.getString("DateTimeTo") ;
+						nevg_array[i] = name;
+						flag = true;
+
+
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+
+
+				adapter = new ArrayAdapter<String>(InfoActivity.this,
+						android.R.layout.simple_list_item_1, android.R.id.text1, nevg_array);
+
+				lv_history.setAdapter(adapter);
+				pd.dismiss();
+				lv_history.setOnItemClickListener(new AdapterView.OnItemClickListener()
+				{
+					// argument position gives the index of item which is clicked
+					public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
+					{
+						String selectedmovie=nevg_array[position];
+
+						try{
+							JSONObject mJsonObject = mArray.getJSONObject(position);
+							SharedPreferencesHelper.setMobile(con,""+mJsonObject.getString("ContactNo"));
+							SharedPreferencesHelper.setName(con,""+mJsonObject.getString("PassengerName"));
+							//SharedPreferencesHelper.setStaff(con,""+mJsonObject.getString("Request"));
+							//	SharedPreferencesHelper.setName(con,""+mJsonObject.getString("Request"));
+							selectedmovie = mJsonObject.getString("AllocationId");
+							SharedPreferencesHelper.setAllocationid(con,""+mJsonObject.getString("AllocationId"));
+
+							Log.d("reg no---", mJsonObject.getString("Request"));
+							SharedPreferencesHelper.setReqNo(con,mJsonObject.getString("Request"));
+
+						} catch (JSONException e)
+
+						{
+							e.printStackTrace();
+						}
+						Toast.makeText(getApplicationContext(), "Request Selected : "+selectedmovie,   Toast.LENGTH_LONG).show();
+						Intent i = new Intent(InfoActivity.this, RequestDetailsActivity.class);
+						i.putExtra("request",selectedmovie);
+						startActivity(i);
+					}
+				});
+
+
+
+//				adapter=new ArrayAdapter<String>(
+//						MainActivity.this,android.R.layout.simple_list_item_1, nevg_array){
+
+				JSONArray mArray2;
+				try {
+					mArray2 = new JSONArray(response.toString());
+					for (int i = 0; i < mArray2.length(); i++) {
+						JSONObject mJsonObject = mArray2.getJSONObject(i);
+						Log.d("OutPut---", mJsonObject.getString("PassengerName"));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
+		}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				//sToast(error.toString());
+				//Log.e("Exception",error.toString());
+			}
+		});
+
+		jReq.setRetryPolicy(new DefaultRetryPolicy(5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+		mVolleyQueue.add(jReq);
 	}
 
 

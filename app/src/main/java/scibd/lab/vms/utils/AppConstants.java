@@ -18,6 +18,7 @@ public class AppConstants {
     public static final String LOGIN_API = "http://vmsservice.scibd.info/vmsservice.asmx/CheckSignIn";
     public static final String POSTDATA_API = "http://vmsservice.scibd.info/vmsservice.asmx";
     public static final String CONFIRM_API = "http://vmsservice.scibd.info/vmsservice.asmx/ConfirmRequest?";
+    public static final String HISTORY_API = "http://vmsservice.scibd.info/vmsservice.asmx/GetRequestHistory?";
 
     public static final String SUBMIT_API = "http://vmsservice.scibd.info/vmsservice.asmx/PostRequest?";
     public static final String checklist_API = "http://vmsservice.scibd.info/vmsservice.asmx/PostChecklist?";

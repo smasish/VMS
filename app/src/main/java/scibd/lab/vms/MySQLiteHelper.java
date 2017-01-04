@@ -46,6 +46,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_endKM = "endkm";
 	public static final String COLUMN_enddatetime = "endtime";
 
+	public static final String COLUMN_staff = "staff";
+
 	private static final String DATABASE_NAME = "testdb.db";
 	private static final int DATABASE_VERSION = 1;
 
@@ -58,6 +60,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ " text not null, " + COLUMN_endplace
 			+ " text not null, "+ COLUMN_endKM
 			+ " text not null, "+ COLUMN_enddatetime
+			+ " text not null, "+ COLUMN_staff
 			+ " text not null);";
 
 	public MySQLiteHelper(Context context) {

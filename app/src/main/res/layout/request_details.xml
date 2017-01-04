@@ -60,6 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
+
                 android:layout_marginRight="15dp">
 
             </TextView>>
@@ -383,6 +384,8 @@
                 android:background="@color/colorPrimary"
                 android:layout_marginLeft="20dp"
 
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:onClick="close"
 
                 android:text="Cancel" />
@@ -395,29 +398,38 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:text="Save" />
 
             <Button
             android:id="@+id/btnRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="submit"
+                android:onClick="delete"
+                android:text="Delete"
             android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
 
-            android:text="Submit" />
+            />
 
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="delete"
+
+                android:onClick="submit"
+                android:text="Submit"
                 android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
 
-                android:text="Delete" />
+                />
         </LinearLayout>
 
 
@@ -447,9 +459,11 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="15dp"
-                android:text="Confirm Trip" />
+                android:text="Save" />
         </LinearLayout>
 
 

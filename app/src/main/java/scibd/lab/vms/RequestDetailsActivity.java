@@ -93,9 +93,9 @@ public class RequestDetailsActivity extends AppCompatActivity {
 	String[] nevg_array;
 	List<String> categories;
 	String request_trip = "",confirm_id="";
-
+	int a;
 	private boolean submitflag = false;
-
+	String staffing = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -129,7 +129,7 @@ public class RequestDetailsActivity extends AppCompatActivity {
 
 		String a = "01911612673.";
 		Log.d("Login oncreate-", "start===="+str);
-		req_no.setText(""+SharedPreferencesHelper.getStaff(con));
+		req_no.setText(""+str);
 
 		startpoint = (EditText) findViewById(R.id.startplace_id);
 		startkm = (EditText) findViewById(R.id.startkm_id);
@@ -158,8 +158,14 @@ public class RequestDetailsActivity extends AppCompatActivity {
 		Log.d("-----", "mobile===="+SharedPreferencesHelper.getMobile(con));
 		String staff = "";//getIntent().getStringExtra("staffid");
 		staff = SharedPreferencesHelper.getStaff(con);
-		req_no.setText(""+staff);
+		//req_no.setText(""+staff);
+
+
+
+		if(SharedPreferencesHelper.getName(con).length()>60)
+			passenger_name.setLines(3);
 		passenger_name.setText(""+SharedPreferencesHelper.getName(con));
+
 		contact_no.setText(""+SharedPreferencesHelper.getMobile(con));
 //		from_date.setText(""+a);
 //		todate.setText(""+a);
@@ -425,6 +431,8 @@ if(start_place.length()>1 && start_km.length()>=1) {
 			data.put("EndTime", t.getEnddate().toString());
 			data.put("EndKM", t.getEndKM().toString());
 
+				data.put("StaffID", t.getStaff_id().toString());
+
 				Log.d(".response--.", ".."+data);
 				return data;
 			}
@@ -439,7 +447,21 @@ if(start_place.length()>1 && start_km.length()>=1) {
 		confirm_id = staff_id.getText().toString();
 
 		if(confirm_id.length()>=2 && confirm_id.length()<=5){
-			confirmtrip();
+			//confirmtrip();
+			if(datasource.getAllComments().size()>0) {
+				String id = "" + datasource.getAllComments().get(0).getId();
+				datasource.updateStaffID(id, confirm_id);
+				Log.d(".confirm_id--.", ".." + confirm_id);
+				Toast.makeText(con, "Saved successfully.", Toast.LENGTH_LONG).show();
+
+				staff_id.setText("");
+
+				//datasource.updateStaffID(id, confirm_id);
+				id = "" + datasource.getAllComments().get(0).getStaff_id().toString();
+				Log.d(".confirm_id.", ".." + id);
+			}else
+				AlertMessage.showMessage(con,"Sorry","No entry for trip.");
+
 		}else{
 			AlertMessage.showMessage(con,"Sorry","Please give correct Staff ID.");
 		}
@@ -574,7 +596,23 @@ if(start_place.length()>1 && start_km.length()>=1) {
 
 	public void submit(View v){
 
+		//confirm_id = staff_id.getText().toString();
+		boolean staff = false;
+		if(datasource.getAllComments().size()>0) {
+			TripData t = datasource.getAllComments().get(0);
+			staffing = t.getStaff_id();
 
+			Log.d("..", ".." + staffing);
+			if (staffing.length() >= 2 && staffing.length() <= 5) {
+				//confirmtrip();
+				staff = true;
+			}
+		}
+
+
+//		else{
+//			AlertMessage.showMessage(con,"Sorry","Please give correct Staff ID.");
+//		}
 		//Log.d("..", ".."+start_place);
 	//	Log.d("Login e------", "start===="+start_place);
 		//Log.d("Login Response------", "start===="+start_place);
@@ -588,6 +626,9 @@ if(start_place.length()>1 && start_km.length()>=1) {
 
 		if(spinner.getSelectedItemPosition()==0){
 			AlertMessage.showMessage(con,"Sorry, Car is not selected.","Please select Car");
+		}
+		else if(!staff){
+			AlertMessage.showMessage(con,"Sorry","Please give correct Staff ID.");
 		}
 		else if(tripflag){
 			for(int i = 0;i<datasource.getAllComments().size();i++){
@@ -674,6 +715,7 @@ if(start_place.length()>1 && start_km.length()>=1) {
 						params.put(KEY_USERNAME,start_place);
 						params.put(KEY_PASSWORD,start_km);
 
+						Log.d("-staffing--", ""+staffing );
 
 						try {
 							JSONObject data = new JSONObject();
@@ -685,6 +727,7 @@ if(start_place.length()>1 && start_km.length()>=1) {
 							data.put("EndPoint", start_place);
 							data.put("EndTime", start_place);
 							data.put("EndKM", start_place);
+							data.put("StaffID", staffing);
 
 							Log.e("request",data.toString());
 							params.put("data login-------", data.toString());
@@ -847,7 +890,7 @@ if(start_place.length()>1 && start_km.length()>=1) {
 		mHour = c.get(Calendar.HOUR_OF_DAY);
 		mMinute = c.get(Calendar.MINUTE);
 		ampm = c.get(Calendar.AM_PM);
-		int a = c.get(Calendar.AM_PM);
+		 a = c.get(Calendar.AM_PM);
 
 		if(a == 1)
 			ar = "PM";
@@ -861,9 +904,13 @@ if(start_place.length()>1 && start_km.length()>=1) {
 					@Override
 					public void onTimeSet(TimePicker view, int hourOfDay,
 										  int minute) {
-						Log.d("***ampm*****. ", "===" +ampm);
-						if(hourOfDay<12)
+						Log.d("***ampm*****. ", "===" +hourOfDay);
+						if(hourOfDay<12 && a!=1)
 							ar = "AM";
+						else if(hourOfDay<12 && a==1)
+							ar = "AM";
+						else
+							ar = "PM";
 						if(hourOfDay>12)
 							hourOfDay = hourOfDay-12;
 						if(minute<10 && hourOfDay<10)

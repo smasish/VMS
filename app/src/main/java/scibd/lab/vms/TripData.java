@@ -41,6 +41,8 @@ public class TripData {
 	private String endKM;
 	private String enddate;
 
+	private String staff_id;
+
 	public String getStartkm() {
 		return startkm;
 	}
@@ -87,6 +89,15 @@ public class TripData {
 
 	public void setEndplace(String endplace) {
 		this.endplace = endplace;
+	}
+
+
+	public String getStaff_id() {
+		return staff_id;
+	}
+
+	public void setStaff_id(String staffid) {
+		this.staff_id = staffid;
 	}
 
 	public int getId() {

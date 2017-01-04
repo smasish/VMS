@@ -13,6 +13,19 @@
 
 
         <Button
+            android:id="@+id/btnChecklist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:layout_weight="1.0"
+            android:text="Checklist (0)"
+            android:drawableTop="@drawable/icon_check_list"
+            android:paddingTop="80dp"
+            android:gravity="center_horizontal|top"
+            android:background="@drawable/buttoncolor"
+            />
+
+        <Button
             android:id="@+id/btnReg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,19 +36,10 @@
             android:paddingTop="80dp"
             android:drawableTop="@drawable/icon_tr"
             android:gravity="center_horizontal|top"
-            android:background="@drawable/buttoncolor"/>
+            android:background="@drawable/buttoncolor_grey"
+           />
 
-        <Button
-            android:id="@+id/btnChecklist"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:layout_weight="1.0"
-            android:text="Checklist (0)"
-            android:drawableTop="@drawable/icon_check_list"
-            android:paddingTop="80dp"
-            android:gravity="center_horizontal|top"
-            android:background="@drawable/buttoncolor_grey" />
+
 
     </LinearLayout>
 

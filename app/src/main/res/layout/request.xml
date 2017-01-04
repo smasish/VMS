@@ -8,7 +8,7 @@
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textSize="18sp"
+    android:textSize="22sp"
   android:gravity="center_vertical|center_horizontal"
     android:layout_marginLeft="10dp"
     android:textColor="#202020"
@@ -55,10 +55,35 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:layout_below="@+id/row1"
         android:layout_marginTop="10dp"
+        android:dividerHeight="10.0px"
         android:id="@+id/reqList"
+        >
+
+    </ListView>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="#202020"
+        android:id="@+id/history"
+        android:layout_below="@+id/reqList"
+        android:text="Request History"
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/history"
+        android:layout_marginTop="10dp"
+        android:dividerHeight="10.0px"
+
+        android:id="@+id/historyList"
         >
 
     </ListView>

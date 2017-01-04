@@ -43,7 +43,7 @@ public class QueryDataSource {
 	private SQLiteDatabase database;
 	private MySQLiteHelper dbHelper;
 	private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-			MySQLiteHelper.COLUMN_startplace,MySQLiteHelper.COLUMN_startKM,MySQLiteHelper.COLUMN_startdatetime,MySQLiteHelper.COLUMN_endplace,MySQLiteHelper.COLUMN_endKM,MySQLiteHelper.COLUMN_enddatetime };
+			MySQLiteHelper.COLUMN_startplace,MySQLiteHelper.COLUMN_startKM,MySQLiteHelper.COLUMN_startdatetime,MySQLiteHelper.COLUMN_endplace,MySQLiteHelper.COLUMN_endKM,MySQLiteHelper.COLUMN_enddatetime,MySQLiteHelper.COLUMN_staff };
 
 	public QueryDataSource(Context context) {
 		dbHelper = new MySQLiteHelper(context);
@@ -66,6 +66,7 @@ public class QueryDataSource {
 		values.put(MySQLiteHelper.COLUMN_endplace, endplace);
 		values.put(MySQLiteHelper.COLUMN_endKM, endkm);
 		values.put(MySQLiteHelper.COLUMN_enddatetime, enddatetime);
+		values.put(MySQLiteHelper.COLUMN_staff, "");
 
 		long insertId = database.insert(MySQLiteHelper.TABLE_COMMENTS, null,
 				values);
@@ -97,6 +98,39 @@ public class QueryDataSource {
 			values.put(MySQLiteHelper.COLUMN_endplace, endplace);
 			values.put(MySQLiteHelper.COLUMN_endKM, endkm);
 			values.put(MySQLiteHelper.COLUMN_enddatetime, enddatetime);
+			long insertId = database.insert(MySQLiteHelper.TABLE_COMMENTS, null,
+					values);
+			Log.d("...//....", "..."+values);
+
+			database.update(MySQLiteHelper.TABLE_COMMENTS, values, MySQLiteHelper.COLUMN_ID + " = " + orderId, null);
+			// To show how to query
+			cursor = database.query(MySQLiteHelper.TABLE_COMMENTS,
+					allColumns, MySQLiteHelper.COLUMN_ID + " = " + orderId, null,
+					null, null, null);
+			cursor.moveToFirst();
+			//database.insert(MySQLiteHelper.TABLE_COMMENTS, null, values);
+		}
+
+	}
+
+	public void updateStaffID(String orderId, String staffid) {
+		Cursor cursor = database.rawQuery("SELECT COUNT(1) FROM testtable WHERE _id = "
+				+ orderId , null);
+		cursor.moveToFirst();
+		String count = cursor.getString(0);
+		Log.d("...//update...."+staffid+"..", "..."+count);
+		if (Integer.valueOf(count) > 0) {
+			Log.d("...//update....", "..."+count);
+			ContentValues values = new ContentValues();
+			values.put(MySQLiteHelper.COLUMN_staff, staffid);
+
+
+			database.update(MySQLiteHelper.TABLE_COMMENTS, values, MySQLiteHelper.COLUMN_ID + " = " + orderId, null);
+		} else {
+			ContentValues values = new ContentValues();
+			values.put(MySQLiteHelper.COLUMN_staff, staffid);
+
+
 			long insertId = database.insert(MySQLiteHelper.TABLE_COMMENTS, null,
 					values);
 			Log.d("...//....", "..."+values);
@@ -146,6 +180,7 @@ public class QueryDataSource {
 		tripData.setEndplace(cursor.getString(4));
 		tripData.setEndKM(cursor.getString(5));
 		tripData.setEnddate(cursor.getString(6));
+		tripData.setStaff_id(cursor.getString(7));
 		//Log.d("...//...."+cursor.getString(2), "..."+cursor.getString(1));
 		return tripData;
 	}

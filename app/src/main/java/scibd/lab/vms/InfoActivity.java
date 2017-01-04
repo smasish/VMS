@@ -221,7 +221,8 @@ public class InfoActivity extends AppCompatActivity {
 						JSONObject mJsonObject = mArray.getJSONObject(i);
 						Log.d("OutPut---", mJsonObject.getString("ContactNo"));
 						Log.d("OutPut---", mJsonObject.getString("PassengerName"));
-						name = "Name: "+mJsonObject.getString("PassengerName")+" \nStart Point: "+mJsonObject.getString("Start") + "\nContact No: "+mJsonObject.getString("ContactNo");
+						name = "Name: "+mJsonObject.getString("PassengerName")+" \nStart Point: "+mJsonObject.getString("Start") + "\nContact No: "+mJsonObject.getString("ContactNo")
+								+ "\nFrom: "+mJsonObject.getString("DateTimeFrom")+" To:  "+mJsonObject.getString("DateTimeTo") ;
 						nevg_array[i] = name;
 						flag = true;
 

@@ -40,30 +40,6 @@ public class FuelActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-//        gridAdapter = new GridViewAdapter(this, R.layout.grid_item_monthlayout, getData());
-//        gridView.setAdapter(gridAdapter);
-//
-//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//                ImageItem item = (ImageItem) parent.getItemAtPosition(position);
-//
-//                //Create intent
-//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-////                intent.putExtra("title", item.getTitle());
-
-////
-//                int mon = position+1;
-//                intent.putExtra("pos",mon);
-//                // intent.putExtra("pos",position);
-//                //Log.d("====monthview====", "...month position..>>" + mon);
-//
-//                //Start details activity
-//                startActivity(intent);
-//            }
-//        });
-
-
-
     }
 
 

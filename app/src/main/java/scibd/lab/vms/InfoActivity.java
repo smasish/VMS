@@ -38,11 +38,11 @@ import scibd.lab.vms.utils.SharedPreferencesHelper;
 public class InfoActivity extends AppCompatActivity {
 
 	ListView lv,lv_history;
-	String name = "";
+	String name = "",history_name="";
 	Boolean flag  = false;
 
 	Context con;
-	ArrayAdapter<String> adapter;
+	ArrayAdapter<String> adapter,history_adapter;
 	//RadioAdapter adapter;
 	public TextView Title, Details;
 	int pos = 0;
@@ -50,8 +50,9 @@ public class InfoActivity extends AppCompatActivity {
 	String str = "";
 	private static ProgressDialog pd;
 	String[] nevg_array;
-	JSONArray mArray;
-	private EditText staff_id;
+	String[] history_array;
+	JSONArray mArray,historyArray;
+//	private EditText staff_id;
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -73,14 +74,14 @@ public class InfoActivity extends AppCompatActivity {
 		//adapter = new RadioAdapter(this);
 
 
-		staff_id = (EditText)findViewById(R.id.staffid);
+	//	staff_id = (EditText)findViewById(R.id.staffid);
 
 	}
 
 
 	public void search(View v){
 		String id = "";
-		id = staff_id.getText().toString();
+//		id = staff_id.getText().toString();
 		String url = AppConstants.API_GETREQUEST+id+"&requestNo="+SharedPreferencesHelper.getReqNo(con);
 		Log.d("====url====","----"+url);
 		if(id.length()>=1){
@@ -99,6 +100,7 @@ public class InfoActivity extends AppCompatActivity {
 		new BackOperation().execute("");
 		Log.d("==onresume theke===","----");
 
+		new HistoryList().execute("");
 
 	}
 
@@ -111,7 +113,7 @@ public class InfoActivity extends AppCompatActivity {
 			try {
 
 
-				String url = AppConstants.API_URL+SharedPreferencesHelper.getStaff(con);
+				String url = AppConstants.HISTORY_API+SharedPreferencesHelper.getStaff(con);
 				Log.d("==url======","----"+url);
 				history_parsing(url);
 
@@ -127,7 +129,7 @@ public class InfoActivity extends AppCompatActivity {
 		@Override
 		protected void onPostExecute(String result) {
 
-			lv.setAdapter(adapter);
+			lv_history.setAdapter(history_adapter);
 		}
 
 
@@ -260,15 +262,16 @@ public class InfoActivity extends AppCompatActivity {
 
 
 				try {
-					nevg_array  = new String[response.length()];
-					mArray = new JSONArray(response.toString());
-					for (int i = 0; i < mArray.length(); i++) {
-						JSONObject mJsonObject = mArray.getJSONObject(i);
+					history_array  = new String[response.length()];
+					historyArray = new JSONArray(response.toString());
+					for (int i = 0; i < historyArray.length(); i++) {
+						JSONObject mJsonObject = historyArray.getJSONObject(i);
 						Log.d("OutPut---", mJsonObject.getString("ContactNo"));
 						Log.d("OutPut---", mJsonObject.getString("PassengerName"));
-						name = "Name: "+mJsonObject.getString("PassengerName")+" \nStart Point: "+mJsonObject.getString("Start") + "\nContact No: "+mJsonObject.getString("ContactNo")
+						history_name = "Name: "+mJsonObject.getString("PassengerName") +" \nStart Point: "+mJsonObject.getString("Start")+"   Destinations: "+mJsonObject.getString("Destinations")
+								+ "\nContact No: "+mJsonObject.getString("ContactNo")
 								+ "\nFrom: "+mJsonObject.getString("DateTimeFrom")+" To:  "+mJsonObject.getString("DateTimeTo") ;
-						nevg_array[i] = name;
+						history_array[i] = history_name;
 						flag = true;
 
 
@@ -279,41 +282,46 @@ public class InfoActivity extends AppCompatActivity {
 
 
 
-				adapter = new ArrayAdapter<String>(InfoActivity.this,
-						android.R.layout.simple_list_item_1, android.R.id.text1, nevg_array);
+				history_adapter = new ArrayAdapter<String>(InfoActivity.this,
+						android.R.layout.simple_list_item_1, android.R.id.text1, history_array);
 
-				lv_history.setAdapter(adapter);
-				pd.dismiss();
-				lv_history.setOnItemClickListener(new AdapterView.OnItemClickListener()
-				{
-					// argument position gives the index of item which is clicked
-					public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
-					{
-						String selectedmovie=nevg_array[position];
+				lv_history.setAdapter(history_adapter);
+				//pd.dismiss();
 
-						try{
-							JSONObject mJsonObject = mArray.getJSONObject(position);
-							SharedPreferencesHelper.setMobile(con,""+mJsonObject.getString("ContactNo"));
-							SharedPreferencesHelper.setName(con,""+mJsonObject.getString("PassengerName"));
-							//SharedPreferencesHelper.setStaff(con,""+mJsonObject.getString("Request"));
-							//	SharedPreferencesHelper.setName(con,""+mJsonObject.getString("Request"));
-							selectedmovie = mJsonObject.getString("AllocationId");
-							SharedPreferencesHelper.setAllocationid(con,""+mJsonObject.getString("AllocationId"));
+	// **************************************************
+				///history list item listener
 
-							Log.d("reg no---", mJsonObject.getString("Request"));
-							SharedPreferencesHelper.setReqNo(con,mJsonObject.getString("Request"));
 
-						} catch (JSONException e)
-
-						{
-							e.printStackTrace();
-						}
-						Toast.makeText(getApplicationContext(), "Request Selected : "+selectedmovie,   Toast.LENGTH_LONG).show();
-						Intent i = new Intent(InfoActivity.this, RequestDetailsActivity.class);
-						i.putExtra("request",selectedmovie);
-						startActivity(i);
-					}
-				});
+//				lv_history.setOnItemClickListener(new AdapterView.OnItemClickListener()
+//				{
+//					// argument position gives the index of item which is clicked
+//					public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
+//					{
+//						String selectedmovie=history_array[position];
+//
+//						try{
+//							JSONObject mJsonObject = historyArray.getJSONObject(position);
+//							SharedPreferencesHelper.setMobile(con,""+mJsonObject.getString("ContactNo"));
+//							SharedPreferencesHelper.setName(con,""+mJsonObject.getString("PassengerName"));
+//							//SharedPreferencesHelper.setStaff(con,""+mJsonObject.getString("Request"));
+//							//	SharedPreferencesHelper.setName(con,""+mJsonObject.getString("Request"));
+//							selectedmovie = mJsonObject.getString("AllocationId");
+//							SharedPreferencesHelper.setAllocationid(con,""+mJsonObject.getString("AllocationId"));
+//
+//							Log.d("reg no---", mJsonObject.getString("Request"));
+//							SharedPreferencesHelper.setReqNo(con,mJsonObject.getString("Request"));
+//
+//						} catch (JSONException e)
+//
+//						{
+//							e.printStackTrace();
+//						}
+//						Toast.makeText(getApplicationContext(), "Request Selected : "+selectedmovie,   Toast.LENGTH_LONG).show();
+//						Intent i = new Intent(InfoActivity.this, RequestDetailsActivity.class);
+//						i.putExtra("request",selectedmovie);
+//						startActivity(i);
+//					}
+//				});
 
 
 
@@ -368,7 +376,8 @@ public class InfoActivity extends AppCompatActivity {
 						JSONObject mJsonObject = mArray.getJSONObject(i);
 						Log.d("OutPut---", mJsonObject.getString("ContactNo"));
 						Log.d("OutPut---", mJsonObject.getString("PassengerName"));
-						name = "Name: "+mJsonObject.getString("PassengerName")+" \nStart Point: "+mJsonObject.getString("Start") + "\nContact No: "+mJsonObject.getString("ContactNo")
+						name = "Name: "+mJsonObject.getString("PassengerName")+"\nDestinations: "+mJsonObject.getString("Destinations")+
+								" 	Start Point: "+mJsonObject.getString("Start") + "\nContact No: "+mJsonObject.getString("ContactNo")
 								+ "\nFrom: "+mJsonObject.getString("DateTimeFrom")+" To:  "+mJsonObject.getString("DateTimeTo") ;
 						nevg_array[i] = name;
 						flag = true;
@@ -409,6 +418,7 @@ public class InfoActivity extends AppCompatActivity {
 					public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
 					{
 						String selectedmovie=nevg_array[position];
+						String req_no = "";
 
 						try{
 						JSONObject mJsonObject = mArray.getJSONObject(position);
@@ -418,7 +428,7 @@ public class InfoActivity extends AppCompatActivity {
 						//	SharedPreferencesHelper.setName(con,""+mJsonObject.getString("Request"));
 							selectedmovie = mJsonObject.getString("AllocationId");
 							SharedPreferencesHelper.setAllocationid(con,""+mJsonObject.getString("AllocationId"));
-
+							req_no =  mJsonObject.getString("Request");
 							Log.d("reg no---", mJsonObject.getString("Request"));
 							SharedPreferencesHelper.setReqNo(con,mJsonObject.getString("Request"));
 
@@ -429,7 +439,7 @@ public class InfoActivity extends AppCompatActivity {
 					}
 						Toast.makeText(getApplicationContext(), "Request Selected : "+selectedmovie,   Toast.LENGTH_LONG).show();
 						Intent i = new Intent(InfoActivity.this, RequestDetailsActivity.class);
-						i.putExtra("request",selectedmovie);
+						i.putExtra("request",req_no);
 						startActivity(i);
 					}
 				});

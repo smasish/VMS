@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -631,11 +632,38 @@ if(start_place.length()>1 && start_km.length()>=1) {
 			AlertMessage.showMessage(con,"Sorry","Please give correct Staff ID.");
 		}
 		else if(tripflag){
-			for(int i = 0;i<datasource.getAllComments().size();i++){
-				//int ind = datasource.getAllComments().get(i).getId();
-				Log.d(".ind.---", ".."+i);
-				postAllTrip3(i);
-			}
+
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+			builder.setTitle("Final Submission:");
+			builder.setMessage("Do you want to submit this trip?");
+
+			builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface dialog, int which) {
+					// Do nothing but close the dialog
+					for(int i = 0;i<datasource.getAllComments().size();i++){
+						//int ind = datasource.getAllComments().get(i).getId();
+						Log.d(".ind.---", ".."+i);
+						postAllTrip3(i);
+					}
+					dialog.dismiss();
+				}
+			});
+
+			builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					// Do nothing
+					dialog.dismiss();
+				}
+			});
+
+			AlertDialog alert = builder.create();
+			alert.show();
+
 
 		}else{
 			AlertMessage.showMessage(con,"Sorry,Can't submit now.","You have to complete Trip");

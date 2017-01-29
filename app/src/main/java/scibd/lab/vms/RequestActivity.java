@@ -33,7 +33,7 @@ public class RequestActivity extends Activity {
 	private TextView ab;
 	private ListView lv;
 
-	final String[] links = new String[] { "Daily Qda","Chantinga","Biogra",
+	final String[] links = new String[] { "Daily Qda","Chantinga","Biograp",
 			"gdfgs", "Contact Us" };
 
 	private Context con;

@@ -6,6 +6,10 @@
     <string name="tvWelcome">Welcome to Vehicle Management System</string>
     <string name="imONDESK">imOndeskImg</string>
 
+    <string name="cash_mode">Cash</string>
+    <string name="cash_mode2">Credit</string>
+
+
     <string-array name="image_month">
         <item>@drawable/odr</item>
         <item>@drawable/odr</item>

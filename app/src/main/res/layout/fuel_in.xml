@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay1"
+            android:layout_below="@+id/lay10"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/date_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start Date  : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/datetext_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:hint="Select Date"
+                android:inputType="date"
+                android:onClick="dateshow"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay2"
+            android:layout_below="@+id/lay1"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/txt_car_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+                android:text="Select Car              :"
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Spinner
+                android:id="@+id/car_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:background="@drawable/spinner_border"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:id="@+id/lay7"-->
+            <!--android:layout_below="@+id/lay6"-->
+            <!--android:layout_marginLeft="25dp"-->
+            <!--android:orientation="vertical" >-->
+
+            <!--<ListView-->
+                <!--android:id="@+id/list"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:dividerHeight="2dp" />-->
+
+            <!--</LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay3"
+            android:layout_below="@+id/lay2"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tx_startkm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Start KM : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/startkm_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:inputType="number"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay4"
+            android:layout_below="@+id/lay3"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tx_startplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Fuel Consumption : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/startplace_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay5"
+            android:layout_below="@+id/lay4"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/fuel_station"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+                android:text="Select Car              :"
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Spinner
+                android:id="@+id/fuel_station_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:background="@drawable/spinner_border"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay6"
+            android:layout_below="@+id/lay5"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/time_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="TransactionMode: "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <RadioGroup
+                android:id="@+id/radioSex"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/radioMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cash_mode"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cash_mode2" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lay7"
+            android:layout_below="@+id/lay6"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="25dp"
+
+                android:text="Fuel Consumption : "
+                android:textColor="#000000"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/staff_id"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+
+                android:layout_marginRight="15dp"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="650dp"
+            android:gravity="center_horizontal"
+            android:id="@+id/savelayout"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_marginLeft="20dp"
+
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:onClick="close"
+
+                android:text="Cancel" />
+
+
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:onClick="submit"
+                android:text="Submit"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                />
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</ScrollView>

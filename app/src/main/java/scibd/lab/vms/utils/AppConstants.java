@@ -20,6 +20,9 @@ public class AppConstants {
     public static final String CONFIRM_API = "http://vmsservice.scibd.info/vmsservice.asmx/ConfirmRequest?";
     public static final String HISTORY_API = "http://vmsservice.scibd.info/vmsservice.asmx/GetRequestHistory?staffID=";
 
+    public static final String FUEL_API = "http://vmsservice.scibd.info/vmsservice.asmx";
+
+
     public static final String SUBMIT_API = "http://vmsservice.scibd.info/vmsservice.asmx/PostRequest?";
     public static final String checklist_API = "http://vmsservice.scibd.info/vmsservice.asmx/PostChecklist?";
     public static final double CAT_LIST_LG_WIDTH_PERC = 0.15;

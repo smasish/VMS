@@ -39,6 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import scibd.lab.vms.utils.AppConstants;
 import scibd.lab.vms.utils.SharedPreferencesHelper;
 
 public class FuelActivity extends AppCompatActivity  {
@@ -60,7 +61,8 @@ public class FuelActivity extends AppCompatActivity  {
 
     private int mYear, mMonth, mDay, mHour, mMinute,ampm;
     private EditText  date;
-    String name="",fuel_name="";
+    private EditText startDate,startkm,fuel_Consumption, staff_Id;
+    String name="",fuel_name="",start_date="",start_km="",fuel_consumption="",staff="",fuel_station="",car_no="",radio_id="";
 
     List<String> categories, fuel_category;
 
@@ -75,11 +77,14 @@ public class FuelActivity extends AppCompatActivity  {
         con =this;
         radioGroup = (RadioGroup) findViewById(R.id.radiotype);
 
-        date = (EditText) findViewById(R.id.datetext_id);
+        startDate = (EditText) findViewById(R.id.datetext_id);
         spinner = (Spinner) findViewById(R.id.car_id);
         fuelSpinner = (Spinner) findViewById(R.id.fuel_station_id);
 
 
+        startkm = (EditText) findViewById(R.id.startkm_id);
+        fuel_Consumption = (EditText) findViewById(R.id.fuel_id);
+        staff_Id = (EditText) findViewById(R.id.staff_id);
 
         submitflag = false;
 
@@ -109,6 +114,75 @@ public class FuelActivity extends AppCompatActivity  {
 
         loadFuelStation();
     }
+
+    public void submit(View v){
+
+
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+        radioButton = (RadioButton) findViewById(selectedId);
+
+//        Toast.makeText(FuelActivity.this,
+//                "....number "+selectedId, Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(FuelActivity.this,
+                radioButton.getText(), Toast.LENGTH_SHORT).show();
+        carno = spinner.getSelectedItem().toString();
+
+        start_date="";
+        start_km="";
+        fuel_consumption="";
+        staff="";
+        fuel_station="";
+
+        radio_id="";
+
+        radio_id = radioButton.getText().toString();
+        fuel_station = fuelSpinner.getSelectedItem().toString();
+
+        Log.d(".car no--.", ".."+carno);
+
+        start_date = startDate.getText().toString();
+        start_km =  startkm.getText().toString();
+        fuel_consumption =  fuel_Consumption.getText().toString();
+        staff =  staff_Id.getText().toString();
+
+        Log.d("start_place--", ""+start_date);
+
+
+
+       // start_time = date.getText().toString()+" "+start_km.getText().toString();;
+      //  TripData tripData = null;
+
+        if(start_date.length()<6 ) {
+
+            AlertMessage.showMessage(con, "Sorry", "Invalid start Date.");
+        }
+        else if(start_km.length()<3){
+            AlertMessage.showMessage(con, "Sorry", "Invalid start KM.");
+        }
+        else if(fuel_consumption.length()<2){
+            AlertMessage.showMessage(con, "Sorry", "Invalid  fuel consumption.");
+        }
+        else if(staff.length()<3){
+            AlertMessage.showMessage(con, "Sorry", "Invalid staff ID.");
+        }
+        else if(radio_id.length()<2){
+            AlertMessage.showMessage(con, "Sorry", "Invalid TransactionMode mode.");
+        }
+        else if(carno.length()<3){
+            AlertMessage.showMessage(con, "Sorry", "Invalid car no.");
+        }
+        else if(fuel_station.length()<1){
+            AlertMessage.showMessage(con, "Sorry", "Invalid fuel station no.");
+        }
+        else{
+            postAllTrip3();
+        }
+
+    }
+
+
 
 
     private void loadFuelStation(){
@@ -225,33 +299,16 @@ public class FuelActivity extends AppCompatActivity  {
     }
 
 
-    public void submit(View v){
-
-
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-
-        radioButton = (RadioButton) findViewById(selectedId);
-
-//        Toast.makeText(FuelActivity.this,
-//                "....number "+selectedId, Toast.LENGTH_SHORT).show();
-
-        Toast.makeText(FuelActivity.this,
-                radioButton.getText(), Toast.LENGTH_SHORT).show();
-        carno = spinner.getSelectedItem().toString();
-
-        Log.d(".car no--.", ".."+carno);
-
-    }
 
 
 
-    private void postAllTrip3(final int x){
+    private void postAllTrip3(){
 
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Posting data to server.Please wait...");
         progressDialog.show();
 
-        String URL = "http://vmsservice.scibd.info/vmsservice.asmx/PostRequest?";
+        String URL = AppConstants.FUEL_API;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -263,7 +320,7 @@ public class FuelActivity extends AppCompatActivity  {
                         //openProfile();
 //							tripData = (TripData) datasource.getAllComments().remove(0); //(TripData) getListAdapter().getItem(0);
                         submitflag = true;
-                        Log.d("====x=", "..xx..>>" + x);
+                        Log.d("====x=", "..xx..>>" );
                      //   int size = datasource.getAllComments().size();
 //                        if(x == datasource.getAllComments().size()-1) {
 //                            for (int i = 0; i < size; i++) {
@@ -296,17 +353,19 @@ public class FuelActivity extends AppCompatActivity  {
                 carno = spinner.getSelectedItem().toString();
                Log.d("@@@@ car no ---","+carno");
 
-                data.put("AllocationId", SharedPreferencesHelper.getAllocationid(con));
+             //   data.put("AllocationId", SharedPreferencesHelper.getAllocationid(con));
                 //data.put("StaffID", SharedPreferencesHelper.getStaff(con));
-                data.put("CarNo", carno);
+
                 //data.put("StaffID", start_place);
                 //data.put("CarNo", start_place);
-//                data.put("StartPoint", t.getStartplace().toString());
-//                data.put("StartTime", t.getStartdate().toString());
-//                data.put("StartKM", t.getStartkm().toString());
-//                data.put("EndPoint", t.getEndplace().toString());
-//                data.put("EndTime", t.getEnddate().toString());
-//                data.put("EndKM", t.getEndKM().toString());
+
+                data.put("TransactionDate", start_date);
+                data.put("CarNo",carno);
+                data.put("KM", start_km);
+                data.put("FuelConsumpt", fuel_consumption);
+                data.put("FuelStationID", fuel_station);
+                data.put("TransactionMode", radio_id);
+                data.put("StaffID", staff);
 //
 //                data.put("StaffID", t.getStaff_id().toString());
 
@@ -375,7 +434,7 @@ public class FuelActivity extends AppCompatActivity  {
 //							ex.printStackTrace();
 //						}
 
-                        date.setText(year + "-" + b + "-" + c);
+                        startDate.setText(year + "-" + b + "-" + c);
 
 
                     }

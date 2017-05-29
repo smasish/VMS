@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginLeft="25dp"
-                android:text="Select Car              :"
+                android:text="FuelStation ID         :"
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <Spinner
@@ -188,7 +188,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <RadioGroup
-                android:id="@+id/radioSex"
+                android:id="@+id/radiotype"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
@@ -222,7 +222,7 @@
 
                 android:layout_marginLeft="25dp"
 
-                android:text="Fuel Consumption : "
+                android:text="Staff ID: "
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <EditText

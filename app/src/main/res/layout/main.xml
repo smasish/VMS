@@ -62,7 +62,7 @@
             android:background="@drawable/buttoncolor_grey"/>
 
         <Button
-            android:id="@+id/btAppVehicle"
+            android:id="@+id/btn_fuel_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/white"

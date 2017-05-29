@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GridView gridView;
     private GridViewAdapter gridAdapter;
 
-    private Button reqBtn,checkBtn,travelBtn,maintainBtn;
+    private Button reqBtn,checkBtn,travelBtn,maintainBtn,fuel_btn;
 
     private Context con;
 
@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkBtn.setOnClickListener(this);
         travelBtn = (Button)findViewById(R.id.btAppTravel);
 
+
+        fuel_btn = (Button)findViewById(R.id.btn_fuel_id);
+        fuel_btn.setOnClickListener(this);
 
 
 //        gridAdapter = new GridViewAdapter(this, R.layout.grid_item_monthlayout, getData());
@@ -114,6 +117,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent check = new Intent(MainActivity.this, ChecklistActivity.class);
 
                 startActivity(check);
+                break;
+            case R.id.btn_fuel_id:
+                // TODO Auto-generated method stub
+                Intent fuel = new Intent(MainActivity.this, FuelActivity.class);
+
+                startActivity(fuel);
                 break;
             case R.id.btAppTravel:
                 // TODO Auto-generated method stub

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -68,6 +69,7 @@ public class FuelActivity extends AppCompatActivity  {
 
     ArrayAdapter<String> spinAdapter, fuelAdapter;
 
+    int fuel_in = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,22 @@ public class FuelActivity extends AppCompatActivity  {
         loadCars();
 
         loadFuelStation();
+
+        fuelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+               fuel_in = arg2;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
     public void submit(View v){
@@ -363,7 +381,7 @@ public class FuelActivity extends AppCompatActivity  {
                 data.put("CarNo",carno);
                 data.put("KM", start_km);
                 data.put("FuelConsumpt", fuel_consumption);
-                data.put("FuelStationID", fuel_station);
+                data.put("FuelStationID", ""+fuel_in);
                 data.put("TransactionMode", radio_id);
                 data.put("StaffID", staff);
 //

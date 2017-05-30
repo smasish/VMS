@@ -34,8 +34,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -317,6 +320,28 @@ public class FuelActivity extends AppCompatActivity  {
     }
 
 
+    public static boolean CheckDates(String startDate, String endDate) {
+
+    //    SimpleDateFormat dfDate = new SimpleDateFormat("dd-MMM-yyyy");
+
+        SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
+
+        boolean b = false;
+
+        try {
+            if (dfDate.parse(startDate).before(dfDate.parse(endDate))) {
+                b = true;  // If start date is before end date.
+            } else if (dfDate.parse(startDate).equals(dfDate.parse(endDate))) {
+                b = true;  // If two dates are equal.
+            } else {
+                b = false; // If start date is after the end date.
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return b;
+    }
 
 
 
@@ -338,6 +363,13 @@ public class FuelActivity extends AppCompatActivity  {
                         //openProfile();
 //							tripData = (TripData) datasource.getAllComments().remove(0); //(TripData) getListAdapter().getItem(0);
                         submitflag = true;
+
+                        String res = response.toString().trim();
+                        Log.d("====x=", "..res length..>>"+res.length() );
+
+                        if(res.equalsIgnoreCase("Successful") || res.length()==12)
+                            finish();
+
                         Log.d("====x=", "..xx..>>" );
                      //   int size = datasource.getAllComments().size();
 //                        if(x == datasource.getAllComments().size()-1) {
@@ -452,7 +484,17 @@ public class FuelActivity extends AppCompatActivity  {
 //							ex.printStackTrace();
 //						}
 
-                        startDate.setText(year + "-" + b + "-" + c);
+                        String user = year + "-" + b + "-" + c;
+                        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        Log.d(".date--."+user, ".."+date);
+
+                        if(CheckDates(user,date))
+
+                            startDate.setText(year + "-" + b + "-" + c);
+                        else{
+                            startDate.setText("");
+                            Log.d(".date--.", ".."+date);
+                        }
 
 
                     }

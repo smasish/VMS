@@ -37,7 +37,7 @@
                 android:inputType="date"
                 android:onClick="dateshow"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="60dp"
                 android:layout_marginRight="15dp"/>
         </LinearLayout>
 
@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginLeft="25dp"
-                android:text="Select Car              :"
+                android:text="Select Car :"
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <Spinner
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="60dp"
 
                 android:background="@drawable/spinner_border"
                 android:layout_marginBottom="20dp"
@@ -109,7 +109,7 @@
                 android:singleLine="true"
                 android:inputType="number"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="70dp"
                 android:layout_marginRight="15dp"/>
         </LinearLayout>
 
@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="20dp"
 
                 android:layout_marginRight="15dp"/>
         </LinearLayout>
@@ -161,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="20dp"
 
                 android:background="@drawable/spinner_border"
                 android:layout_marginBottom="20dp"
@@ -222,7 +222,7 @@
 
                 android:layout_marginLeft="25dp"
 
-                android:text="Staff ID: "
+                android:text="Staff ID : "
                 android:textColor="#000000"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             <EditText
@@ -230,7 +230,7 @@
                 android:layout_width="match_parent"
                 android:singleLine="true"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="70dp"
 
                 android:layout_marginRight="15dp"/>
         </LinearLayout>

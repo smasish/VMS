@@ -20,7 +20,7 @@ public class AppConstants {
     public static final String CONFIRM_API = "http://vmsservice.scibd.info/vmsservice.asmx/ConfirmRequest?";
     public static final String HISTORY_API = "http://vmsservice.scibd.info/vmsservice.asmx/GetRequestHistory?staffID=";
 
-    public static final String FUEL_API = "http://vmsservice.scibd.info/vmsservice.asmx";
+    public static final String FUEL_API = "http://vmsservice.scibd.info/vmsservice.asmx/PostFuelConsumption?";
 
 
     public static final String SUBMIT_API = "http://vmsservice.scibd.info/vmsservice.asmx/PostRequest?";

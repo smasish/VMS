@@ -231,7 +231,7 @@
                 android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="70dp"
-
+                android:inputType="number"
                 android:layout_marginRight="15dp"/>
         </LinearLayout>
 

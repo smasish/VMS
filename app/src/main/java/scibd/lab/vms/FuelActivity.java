@@ -119,6 +119,8 @@ public class FuelActivity extends AppCompatActivity  {
 
         loadFuelStation();
 
+        loadFuelHistory();
+
         fuelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -259,6 +261,64 @@ public class FuelActivity extends AppCompatActivity  {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
+    }
+
+
+    private void loadFuelHistory(){
+
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+
+
+        progressDialog.setMessage("Fetching Car list...");
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST,
+                AppConstants.FUEL_his_API, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+
+                //
+                // Log.d("------------>>>>" , "||");
+                //response = response.replaceAll("\"","");
+                Log.d("--car->>>>" + response, "||");
+                //  String tokens[] = response.split("\\n");
+                //    Log.d("-------len----->>>>" , "||"+tokens.length);
+
+
+
+                JSONArray mArray;
+                try {
+                    //nevg_array  = new String[response.length()];
+                    mArray = new JSONArray(response.toString());
+                    for (int i = 0; i < mArray.length(); i++) {
+                        JSONObject mJsonObject = mArray.getJSONObject(i);
+                        //Log.d("OutPut---", mJsonObject.getString("CarNo"));
+
+                        fuel_name = mJsonObject.getString("FuelStationName");
+                        //nevg_array[i] = name;
+                        fuel_category.add(fuel_name);
+                        //flag = true;
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                fuelSpinner.setAdapter(fuelAdapter);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(FuelActivity.this,"No Cars found",Toast.LENGTH_SHORT).show();
+            }
+        }){
+
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+
     }
 
     private void loadCars(){
